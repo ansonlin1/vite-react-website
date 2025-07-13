@@ -9,16 +9,46 @@ This project is a React TypeScript website that runs in a Podman container. No l
   - Linux: Use your distribution's package manager
   - macOS: `brew install podman`
 
+## Podman Machine Management
+
+Before running any containers, make sure the Podman machine is running:
+
+1. Initialize the Podman machine (first time only):
+
+```powershell
+podman machine init
+```
+
+2. Start the Podman machine:
+
+```powershell
+podman machine start
+```
+
+3. Stop the Podman machine when done:
+
+```powershell
+podman machine stop
+```
+
+4. Check Podman machine status:
+
+```powershell
+podman machine list
+```
+
 ## Building and Running the Project
 
 ### First Time Setup
 
 1. Build the container:
+
 ```powershell
 podman build -t react-app .
 ```
 
 2. Run the container:
+
 ```powershell
 podman run -d -p 8080:80 --name react-website react-app
 ```
@@ -28,21 +58,25 @@ The application will be available at http://localhost:8080
 ### Daily Usage Commands
 
 - Start the container:
+
 ```powershell
 podman start react-website
 ```
 
 - Stop the container:
+
 ```powershell
 podman stop react-website
 ```
 
 - View container logs:
+
 ```powershell
 podman logs react-website
 ```
 
 - List running containers:
+
 ```powershell
 podman ps
 ```
@@ -50,12 +84,14 @@ podman ps
 ### Rebuilding After Changes
 
 1. Stop and remove the existing container:
+
 ```powershell
 podman stop react-website
 podman rm react-website
 ```
 
 2. Rebuild and run:
+
 ```powershell
 podman build -t react-app .
 podman run -d -p 8080:80 --name react-website react-app
@@ -64,10 +100,10 @@ podman run -d -p 8080:80 --name react-website react-app
 ### Cleanup
 
 To remove all containers and images:
+
 ```powershell
 podman stop react-website
 podman rm react-website
 podman rmi react-app
 podman system prune -f
-```
 ```
