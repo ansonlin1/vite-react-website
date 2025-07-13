@@ -1,109 +1,62 @@
-# React TypeScript Website with Podman
+# React TypeScript Website
 
-This project is a React TypeScript website that runs in a Podman container. No local Node.js installation is required.
+A modern React TypeScript website built with Vite and TailwindCSS.
 
 ## Prerequisites
 
-- Podman installed on your system
-  - Windows: Install from https://github.com/containers/podman/releases
-  - Linux: Use your distribution's package manager
-  - macOS: `brew install podman`
+- Node.js (version 18.16.0 or higher)
+- npm (version 9.5.1 or higher)
 
-## Podman Machine Management
+## Getting Started
 
-Before running any containers, make sure the Podman machine is running:
+1. Clean and install dependencies:
 
-1. Initialize the Podman machine (first time only):
-
-```powershell
-podman machine init
+```bash
+npm run clean # Optional: Use this to clean up node_modules and package-lock.json
+npm install
 ```
 
-2. Start the Podman machine:
+2. Start the development server:
 
-```powershell
-podman machine start
+```bash
+npm run dev
 ```
 
-3. Stop the Podman machine when done:
+The application will be available at http://localhost:5173
 
-```powershell
-podman machine stop
+## Available Scripts
+
+- `npm run clean` - Removes node_modules directory and package-lock.json file
+- `npm run dev` - Starts the development server with hot reload
+- `npm run build` - Builds the application for production
+- `npm run preview` - Previews the production build locally
+- `npm run lint` - Runs ESLint to check code quality
+
+## Development
+
+The project uses:
+
+- React with TypeScript for type-safe development
+- Vite for fast development and optimized builds
+- TailwindCSS for styling
+- ESLint for code quality
+
+## Project Structure
+
+```
+src/
+├── components/     # Reusable UI components
+│   └── layout/     # Layout components (Header, Footer)
+├── assets/        # Static assets
+└── App.tsx        # Main application component
 ```
 
-4. Check Podman machine status:
+## Building for Production
 
-```powershell
-podman machine list
+To create a production build:
+
+```bash
+npm run build
 ```
 
-## Building and Running the Project
-
-### First Time Setup
-
-1. Build the container:
-
-```powershell
-podman build -t react-app .
-```
-
-2. Run the container:
-
-```powershell
-podman run -d -p 8080:80 --name react-website react-app
-```
-
-The application will be available at http://localhost:8080
-
-### Daily Usage Commands
-
-- Start the container:
-
-```powershell
-podman start react-website
-```
-
-- Stop the container:
-
-```powershell
-podman stop react-website
-```
-
-- View container logs:
-
-```powershell
-podman logs react-website
-```
-
-- List running containers:
-
-```powershell
-podman ps
-```
-
-### Rebuilding After Changes
-
-1. Stop and remove the existing container:
-
-```powershell
-podman stop react-website
-podman rm react-website
-```
-
-2. Rebuild and run:
-
-```powershell
-podman build -t react-app .
-podman run -d -p 8080:80 --name react-website react-app
-```
-
-### Cleanup
-
-To remove all containers and images:
-
-```powershell
-podman stop react-website
-podman rm react-website
-podman rmi react-app
-podman system prune -f
-```
+The build output will be in the `dist` directory.

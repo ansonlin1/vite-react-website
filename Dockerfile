@@ -4,21 +4,27 @@ FROM node:20-alpine AS build
 # Set working directory
 WORKDIR /app
 
-# Install dependencies first and ensure global bin directory is accessible
-COPY package*.json ./
-RUN mkdir -p /app/node_modules/.bin && \
-    npm install --legacy-peer-deps && \
-    chmod +x /app/node_modules/.bin/vite && \
-    npm install -g vite
+# Set proper ownership and permissions
+RUN chown -R node:node /app && \
+    chmod -R 755 /app
+
+# Switch to non-root user
+USER node
+
+# Install dependencies first
+COPY --chown=node:node package*.json ./
+RUN npm install --legacy-peer-deps
+
+# Copy configuration files
+COPY --chown=node:node tailwind.config.js postcss.config.js ./
 
 # Copy the rest of the application
-COPY . .
+COPY --chown=node:node . .
 
-# Build the application using npx
-RUN npx vite build
-
-# Set permissions for the build output
-RUN mkdir -p dist && chown -R node:node /app/dist
+# Initialize Tailwind CSS and build
+RUN mkdir -p dist && \
+    npx tailwindcss init -p && \
+    npm run build
 
 # Production stage
 FROM nginx:alpine
