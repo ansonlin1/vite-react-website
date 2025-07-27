@@ -1,68 +1,147 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Inter:wght@300;400;500;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap');
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+    scroll-behavior: smooth;
   }
-  a:hover {
-    color: #747bff;
+  
+  body {
+    @apply bg-wedding-ivory-50 text-wedding-navy-800 antialiased;
+    @apply selection:bg-wedding-blush-200 selection:text-wedding-navy-900;
   }
-  button {
-    background-color: #f9f9f9;
+
+  /* Dark mode styles */
+  .dark body {
+    @apply bg-wedding-navy-900 text-wedding-ivory-100;
+  }
+
+  /* Improve focus visibility for accessibility */
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-wedding-gold-500;
+  }
+}
+
+@layer components {
+  /* Button styles following wedding theme */
+  .btn-primary {
+    @apply inline-flex items-center px-6 py-3 text-base font-medium rounded-md shadow-soft;
+    @apply bg-wedding-blush-500 text-white hover:bg-wedding-blush-600;
+    @apply focus:outline-none focus:ring-2 focus:ring-wedding-blush-500 focus:ring-offset-2;
+    @apply transition-colors duration-200 ease-in-out;
+    @apply disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center px-6 py-3 text-base font-medium rounded-md shadow-soft;
+    @apply bg-wedding-sage-500 text-white hover:bg-wedding-sage-600;
+    @apply focus:outline-none focus:ring-2 focus:ring-wedding-sage-500 focus:ring-offset-2;
+    @apply transition-colors duration-200 ease-in-out;
+    @apply disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center px-6 py-3 text-base font-medium rounded-md;
+    @apply border-2 border-wedding-blush-500 text-wedding-blush-600 hover:bg-wedding-blush-50;
+    @apply focus:outline-none focus:ring-2 focus:ring-wedding-blush-500 focus:ring-offset-2;
+    @apply transition-all duration-200 ease-in-out;
+    @apply disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  /* Card component */
+  .card {
+    @apply bg-white rounded-lg shadow-soft p-6;
+    @apply dark:bg-wedding-navy-800 dark:text-wedding-ivory-100;
+  }
+
+  /* Form field styles */
+  .form-field {
+    @apply w-full px-4 py-3 border border-wedding-sage-200 rounded-md;
+    @apply focus:outline-none focus:ring-2 focus:ring-wedding-blush-500 focus:border-transparent;
+    @apply transition-all duration-200 ease-in-out;
+    @apply placeholder:text-wedding-navy-400;
+    @apply dark:bg-wedding-navy-700 dark:border-wedding-navy-600 dark:text-wedding-ivory-100;
+  }
+
+  .form-field:invalid {
+    @apply border-red-400 focus:ring-red-500;
+  }
+
+  /* Navigation link styles */
+  .nav-link {
+    @apply relative px-3 py-2 text-sm font-medium text-wedding-navy-700;
+    @apply hover:text-wedding-blush-600 transition-colors duration-200;
+    @apply focus:outline-none focus:text-wedding-blush-600;
+  }
+
+  .nav-link.active::after {
+    @apply absolute bottom-0 left-0 w-full h-0.5 bg-wedding-blush-500;
+    content: '';
+  }
+
+  /* Section spacing */
+  .section {
+    @apply py-16 px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-sm {
+    @apply py-8 px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Typography helpers */
+  .heading-1 {
+    @apply text-4xl md:text-5xl lg:text-6xl font-serif font-semibold text-wedding-navy-900;
+    @apply dark:text-wedding-ivory-100;
+  }
+
+  .heading-2 {
+    @apply text-3xl md:text-4xl font-serif font-medium text-wedding-navy-800;
+    @apply dark:text-wedding-ivory-200;
+  }
+
+  .heading-3 {
+    @apply text-2xl md:text-3xl font-serif font-medium text-wedding-navy-800;
+    @apply dark:text-wedding-ivory-200;
+  }
+
+  .text-accent {
+    @apply text-wedding-blush-600 dark:text-wedding-blush-400;
+  }
+
+  .text-muted {
+    @apply text-wedding-navy-600 dark:text-wedding-ivory-400;
+  }
+}
+
+@layer utilities {
+  /* Custom utilities */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .animate-fade-in-up {
+    animation: fadeInUp 0.6s ease-out forwards;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Responsive container with elegant max-widths */
+  .container-elegant {
+    @apply mx-auto px-4 sm:px-6 lg:px-8;
+    max-width: min(90rem, calc(100vw - 2rem));
   }
 }

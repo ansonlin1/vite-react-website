@@ -1,11 +1,53 @@
-# React TypeScript Website
+# Wedding Website Documentation
 
-A modern React TypeScript website built with Vite and TailwindCSS.
+## Project Overview
 
-## Prerequisites
+A modern, elegant wedding website built with React, TypeScript, and Vite. Features a romantic design with RSVP functionality, event details, music requests, and gift registry information.
 
-- Node.js (version 18.16.0 or higher)
-- npm (version 9.5.1 or higher)
+## Table of Contents
+
+- [Getting Started](#getting-started)
+- [Project Structure](#project-structure)
+- [Features](#features)
+- [Design System](#design-system)
+- [API Documentation](#api-documentation)
+- [Development Guide](#development-guide)
+- [Testing](#testing)
+- [Performance](#performance)
+- [Deployment](#deployment)
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18.16.0 or higher
+- npm 9.5.1 or higher
+
+### Installation
+
+```bash
+# Clone the repository
+git clone <repository-url>
+cd vite-react-website
+
+# Install dependencies
+npm install
+
+# Set up the database
+npm run db:migrate
+
+# Start development server
+npm run dev
+```
+
+### Environment Setup
+
+1. Copy `.env.example` to `.env.local`
+2. Configure environment variables:
+   ```env
+   VITE_API_URL=http://localhost:3001
+   DATABASE_URL=./database.sqlite
+   ```
 
 ## Getting Started
 
